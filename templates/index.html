@@ -1,0 +1,481 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Book Donate platform</title>
+
+        <!-- CSS FILES -->        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;600;700&display=swap" rel="stylesheet">
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        
+
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/bootstrap-icons.css' %}" rel="stylesheet">
+        <link href="{% static 'css/templatemo-ebook-landing.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/style10.css' %}">
+        
+<!--
+
+
+-->
+<style>
+    
+    .gold-coin {
+        font-size: 2em; 
+        color: gold;
+        text-decoration-color: white;
+    }
+    .gifts{
+        font-size: 10em;
+    }
+    .btn-group.bg-primary .dropdown-menu {
+        background-color: white; 
+    }
+
+    .btn-group.bg-primary .dropdown-menu a {
+        color: #000000; /
+    }
+    .btn-orange {
+        background-color: #FFA500; 
+        color: #FFFFFF; 
+    }
+
+    .btn-orange.dropdown-toggle-split::after {
+        border-top-color: #FFFFFF; 
+    }
+    .text-black {
+        color: #000000; 
+    }
+</style>
+    </head>
+    
+    <body>
+
+        <main>
+
+            <nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <a class="navbar-brand" href="{% url 'home' %}">
+                        <i class="navbar-brand-icon bi-book me-2"></i>
+                        <span style="color:red ;">Donate</span>
+                    </a>
+                   
+
+
+                    <div class="d-lg-none ms-auto me-3">
+                        <a href="#" class="btn custom-btn custom-border-btn btn-naira btn-inverted">
+                    </a>
+                    </div>
+    
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+    
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-lg-auto me-lg-4">
+                            <li class="nav-item">
+                                <a class="nav-link " href="{% url 'home' %}">Home</a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link " href="{% url 'book_list' %}"> BookList</a>
+                            </li>
+                             <li class="nav-item">
+                                <a class="nav-link " href="{% url 'platform_comments' %}">Review</a>
+                            </li> 
+                            
+
+                            <li class="nav-item">
+                                <a class="nav-link " href="{% url 'about' %}">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link l" href="{% url 'contactus' %}">Contact</a>
+                            </li>
+                            {% if request.user.is_authenticated %}
+                           
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'deposit_money' %}">Deposit</a>
+                            </li>
+                            {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'login' %}">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'register' %}">Register</a>
+                            </li>
+                            {% endif %}
+
+                           
+                        </ul>
+                        {% if request.user.is_authenticated %}
+                        <div class="btn-group" style="background-color: #007bff;">
+                            <button type="button" class="btn btn-warning">Personalization</button>
+                            <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="visually-hidden">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                {% if request.user.is_authenticated %}
+                                <li><i class="bi bi-coin" style="color: gold;">{{ request.user.account.coin_balance }}</i></li>
+                                <li>
+                                    <div style="color: black; font-weight: bold; padding: 20px;">
+                                        (balance: {{ request.user.account.balance }})
+                                    </div>
+                                </li>
+                                {% endif %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'my_book' %}">Your Book List</a>
+                                </li>
+                            </ul>
+                        </div>
+                        {% endif %}
+                        
+                    </div>
+                </div>
+                
+            </nav>
+            
+
+            <section class="hero-section d-flex justify-content-center align-items-center" id="section_1">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-6 col-12 mb-5 pb-5 pb-lg-0 mb-lg-0">
+
+                            <h6> Book Donate Platform</h6>
+
+                            <h1 class="text-white mb-4">"Donating Book, Educating Nations, Knowledge is power: Donate Now!"</h1>
+
+                            <a href="#section_2" class="btn custom-btn smoothscroll me-3">Discover More</a>
+
+                        </div>
+
+                        <div class="hero-image-wrap col-lg-6 col-12 mt-3 mt-lg-0">
+                            <img src="{% static 'images/education-online-book-store-1.jpg' %}" class="hero-image img-fluid" alt="education online books">
+
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="featured-section">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-8 col-12">
+                            <div class="avatar-group d-flex flex-wrap align-items-center">
+                                <img src="{% static 'images/avatar/portrait-young-woman-standing.jpg' %}" class="img-fluid avatar-image" alt="">
+
+                                <img src="{% static 'images/avatar/portrait-young-man.jpg' %}" class="img-fluid avatar-image avatar-image-left" alt="">
+
+                                <img src="{% static 'images/avatar/pretty-blonde-woman.jpg' %}" class="img-fluid avatar-image avatar-image-left" alt="">
+
+                                <img src="{% static 'images/avatar/studio-portrait-emotional-happy-man-1.jpg' %}" class="img-fluid avatar-image avatar-image-left" alt="">
+
+                                <div class="reviews-group mt-3 mt-lg-0">
+                                    <strong>4.9</strong>
+
+                                    <i class="bi-star-fill"></i>
+                                    <i class="bi-star-fill"></i>
+                                    <i class="bi-star-fill"></i>
+                                    <i class="bi-star-fill"></i>
+                                    <i class="bi-star-fill"></i>
+
+                                    <small class="ms-3">3,650 reviews this platform</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="py-lg-5"></section>
+
+
+            <section class="book-section section-padding" id="section_2">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-6 col-12">
+                            <img src="{% static 'images/tablet-screen_new_cont.jpg' %}" class="img-fluid" alt="">
+                        </div>
+
+                        <div class="col-lg-6 col-12">
+                            <div class="book-section-info">
+                                <h6>Modern &amp; Creative</h6>
+
+                                <h2 class="mb-4">About The Book</h2>
+
+                                <p>Credit goes to <a rel="nofollow" href="https://freepik.com" target="_blank">FreePik</a> we believe in the transformative power of books. Our mission is to make knowledge accessible to all by connecting book donors with eager readers. Join us in fostering a love for reading and learning by donating your gently-used books today</p>
+
+                                <p>we believe in the transformative power of books. Our mission is to make knowledge accessible to all by connecting book donors with eager readers. Join us in fostering a love for reading and learning by donating your gently-used books today</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+         
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <!-- Left column for content -->
+                            <h1 class="text-success">Here are your Gifts</h1>
+                            
+                            <p class="text-primary">Welcome to our exclusive Gift Redemption section! We're excited to share tokens of appreciation with you. To redeem your special gift, simply follow the steps below:</p>
+                            
+                            <ol class="text-info">
+                                <li>Click on the enticing gift icon below.</li>
+                                <li>You will be directed to our dedicated gift redemption page.</li>
+                                <li>Choose your preferred gift from the available options.</li>
+                                <li>Complete the required fields to personalize your gift.</li>
+                                <li>Confirm your selection and proceed to the final step.</li>
+                                <li>Voila! Your chosen gift is now on its way to becoming yours.</li>
+                            </ol>
+                            <div class="d-flex flex-column flex-md-row align-items-md-center gap-56">
+                                 <a href="{% url 'book_wise_post' %}" class="text-center"> 
+                                    <i class="bi bi-gift gifts" style="height: 150px;"></i>
+                                </a>
+                                
+                                <img src="/static/images/gift_2024.webp" alt="Additional Content Image" style="border-radius: 20px; width: 100%; max-width: 400px; height: auto; margin-top: 20px;">
+                            </div>
+                        </div>
+            
+                       
+                    </div>
+                </div>
+            </section>
+            
+
+            <section class="reviews-section section-padding">
+                <div class="container">
+                    <div class="row">
+                     
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="contact-section section-padding" id="section_5">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-5 col-12 mx-auto">
+                            <form class="custom-form ebook-download-form bg-white shadow" action="#" method="post" role="form">
+                                 {% csrf_token %} 
+                                <div class="text-center mb-5">
+                                    <h2 class="mb-1">Donate Your Book</h2>
+                                </div>
+
+                                <div class="ebook-download-form-body">
+                                    <div class="input-group mb-4">
+                                        <input type="text" name="ebook-form-name" id="ebook-form-name" class="form-control" aria-label="ebook-form-name" aria-describedby="basic-addon1" placeholder="Your Name" required>
+
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <i class="custom-form-icon bi-person"></i>
+                                        </span>
+                                    </div>
+
+                                    <div class="input-group mb-4">
+                                        <input type="email" name="ebook-email" id="ebook-email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="your@company.com" aria-label="ebook-form-email" aria-describedby="basic-addon2" required="">
+
+                                        <span class="input-group-text" id="basic-addon2">
+                                            <i class="custom-form-icon bi-envelope"></i>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-lg-8 col-md-10 col-8 mx-auto">
+                                        <button type="submit" class="form-control">Donate</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="col-lg-6 col-12">
+                            <h4 style="color:red ;" class="mt-5">Say hi and talk to us</h4>
+
+                            <h2 class="mb-4">Contact</h2>
+
+                            <p class="mb-3">
+                                <i class="bi-geo-alt me-2"></i>
+                                San Francisco,California, USA
+                            </p>
+
+                            <p class="mb-2">
+                                <a href="tel: 010-020-0340" class="contact-link">
+                                    +16177105517
+                                </a>
+                            </p>
+
+                            <p>
+                                <a href="#" class="contact-link">
+                                    ssumaiya@live.com
+                                </a>
+                            </p>
+
+                            <h6 style="color:red ;" class="site-footer-title mt-5 mb-3">Social</h6>
+
+                            <ul class="social-icon mb-4">
+                                <li class="social-icon-item">
+                                    <a href="#" class="social-icon-link bi-instagram"></a>
+                                </li>
+
+                                <li class="social-icon-item">
+                                    <a href="#" class="social-icon-link bi-twitter"></a>
+                                </li>
+                                
+                                <li class="social-icon-item">
+                                    <a href="#" class="social-icon-link bi-facebook"></a>
+                                </li>
+
+                                <li class="social-icon-item">
+                                    <a href="#" class="social-icon-link bi-whatsapp"></a>
+                                </li>
+                            </ul>
+
+                            <p class="copyright-text">Copyright © 2024 Book Donate Platform
+                            <br><br><a style="color:red ;" rel="nofollow" href="https:https://www.facebook.com/bhinno.shaad" target="_blank">Modified By Sumaiya Sharmin</a></p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </main>
+
+
+        <footer class="footer-section">
+            <div class="container">
+                <div class="footer-cta pt-5 pb-5">
+                    <div class="row">
+                        <div class="col-xl-4 col-md-4 mb-30">
+                            <div class="single-cta">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div class="cta-text">
+                                    <h4>Find us</h4>
+                                    <span>94545 Hesperian Blvd, San Francisco, California</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-md-4 mb-30">
+                            <div class="single-cta">
+                                <i class="fas fa-phone"></i>
+                                <div class="cta-text">
+                                    <h4>Call us</h4>
+                                    <span>+16177105517</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-md-4 mb-30">
+                            <div class="single-cta">
+                                <i class="far fa-envelope-open"></i>
+                                <div class="cta-text">
+                                    <h4>Mail us</h4>
+                                    <span>ssumaiya@live.com</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-content pt-5 pb-5">
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-4 mb-50">
+                            <div class="footer-widget">
+                                
+                                <div class="footer-text">
+                                    <p>we believe in the transformative power of books. Our mission is to make knowledge accessible to all by connecting book donors with eager readers. Join us in fostering a love for reading and learning by donating your gently-used books today.</p>
+                                </div>
+                
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 mb-30">
+                            <div class="footer-widget">
+                                <div class="footer-widget-heading">
+                                    <h3>Useful Links</h3>
+                                </div>
+                                <ul>
+                                    <li><a href="#">Home</a></li>
+                                   
+                                    
+                                    <li><a href="#">portfolio</a></li>
+                                    <li><a href="#">About us</a></li>
+                                    <li><a href="#">Our Services</a></li>
+                                    
+                                    <li><a href="#">Contact us</a></li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
+                            <div class="footer-widget">
+                                <div class="footer-widget-heading">
+                                    <h3>Subscribe</h3>
+                                </div>
+                                <div class="footer-text mb-25">
+                                    <p>Don’t miss to subscribe to our new feeds, kindly fill the form below.</p>
+                                </div>
+                                <div class="subscribe-form">
+                                    <form action="#">
+                                        <input type="text" placeholder="Email Address">
+                                        <button><i class="fab fa-telegram-plane"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 text-center text-lg-left">
+                            <div class="copyright-text">
+                                <p>Copyright &copy; 2024, All Right Reserved Sumaiya Sharmin</a></p>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 d-none d-lg-block text-right">
+                            <div class="footer-menu">
+                                <ul>
+                                    <li><a href="{% url 'home' %}">Home</a></li>
+                                    <li><a href="#">Terms</a></li>
+                                    <li><a href="#">Privacy</a></li>
+                                    <li><a href="#">Policy</a></li>
+                                    <li><a href="#">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- JAVASCRIPT FILES -->
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'js/jquery.sticky.js' %}"></script>
+        <script src="{% static 'js/click-scroll.js' %}"></script>
+        <script src="{% static 'js/custom.js' %}"></script>
+
+    </body>
+</html>

@@ -1,0 +1,90 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg bg-black">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'home' %}">
+         <i class="navbar-brand-icon bi-book me-2"></i> 
+            <span>Donate</span>
+        </a>
+        <div class="d-lg-none ms-auto me-3">
+            <a href="#" class="btn custom-btn custom-border-btn btn-naira btn-inverted">
+                {% comment %} <i class="btn-icon bi-cloud-download"></i> {% endcomment %}
+                {% comment %} <span>Download</span><!-- duplicated another one below for mobile --> {% endcomment %}
+            </a>
+        </div>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-lg-auto me-lg-4">
+                <li class="nav-item">
+                    <a class="nav-link click-scroll" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="{% url 'book_list' %}"> BookList</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link " href="{% url 'about' %}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link l" href="{% url 'contactus' %}">Contact</a>
+                </li>
+                {% if request.user.is_authenticated %}
+
+                {% endif %}
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'platform_comments' %}">Review</a>
+                </li>
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link " href="{% url 'deposit_money' %}">Deposit</a>
+                </li>
+
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link " href="{% url 'login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="{% url 'register' %}">Register</a>
+                </li>
+                {% endif %}
+
+            </ul>
+            {% if request.user.is_authenticated %}
+                        <div class="btn-group bg-primary">
+                            <button type="button" class="btn btn-warning">Personalization</button>
+                            <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split bg-warning" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu ">
+                                {% if request.user.is_authenticated %}
+                               <li class="text-black"> <i class="bi bi-coin gold-coin">{{ request.user.account.coin_balance }}</i></li>
+                                
+                               <li class="text-black">
+                                <div class="text-black my-auto font-black px-5">
+                                    (balance: {{ request.user.account.balance }})
+                                </div>
+                            </li>
+                                {% endif %}
+                            
+                                    <li class="nav-item text-black">
+                                        <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                                    </li>
+                                    <li class="nav-item text-black">
+                                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                                    </li>
+                                
+                                    <li class="nav-item text-black">
+                                        <a class="nav-link " href="{% url 'my_book' %}">Your Book List</a>
+                                    </li>     
+                            </ul>
+                        </div>
+                        {% endif %}
+           
+        </div>
+    </div>
+</nav>

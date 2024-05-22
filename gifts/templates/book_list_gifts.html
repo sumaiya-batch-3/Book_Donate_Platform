@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+<div class="container mt-4">
+    <h2>Book List</h2>
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                {% for book in data %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <img src="{{ book.image.url }}" class="card-img-top" alt="{{ book.title }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ book.title }}</h5>
+                                <p class="card-text">{{ book.description |truncatewords:40 }}</p>
+                                <p class="card-text"><strong>Price:</strong> {{ book.buying_price }} Coins</p>
+                                
+                                {% if request.user.is_authenticated %}
+                                    <form method="post" action="{% url 'redeem_book' book.id %}">
+                                        {% csrf_token %}
+                                        <input type="submit" name="redeem_book" value="Redeem" class="btn btn-success w-50 m-5 mt-3">
+                                    </form>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<h1>Redeemed Books</h1>
+<p style="color: white;">Number of Redeemed Books: {{ redeemed_books|length }}</p>
+
+<ul style="color: white;">
+    {% for redeemed_book in redeemed_books %}
+        <li style="color: white;">{{ redeemed_book.book.title }} - Redeemed on {{ redeemed_book.date }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock content %}
