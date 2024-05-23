@@ -114,7 +114,7 @@ WSGI_APPLICATION = 'Book_Donate_Platform.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         # Replace this value with your local database's connection string.
-        default='postgres://book_donate_platform_user:xXbC2BLs7Y3qJq5qjCOXcIeFet8bNFAv@dpg-cp78fuvsc6pc73a5vit0-a.oregon-postgres.render.com/book_donate_platform',
+        default='postgres://book_donate_user:kNBGP8f09rmKkQ1Wjqk8yRc9AgSp5Boo@dpg-cp7cj5u3e1ms73ai0ve0-a.oregon-postgres.render.com/book_donate',
         
     )
 }
